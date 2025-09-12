@@ -1,0 +1,242 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "generatedAt": "2024-01-15T10:30:00Z",
+    "description": "Large JSON dataset for streaming tests",
+    "totalRecords": 1000
+  },
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "profile": {
+        "age": 28,
+        "location": {
+          "city": "New York",
+          "country": "USA",
+          "coordinates": {
+            "lat": 40.7128,
+            "lng": -74.0060
+          }
+        },
+        "preferences": {
+          "theme": "dark",
+          "notifications": true,
+          "language": "en"
+        }
+      },
+      "orders": [
+        {
+          "orderId": "ORD-001",
+          "date": "2024-01-10T14:30:00Z",
+          "items": [
+            {
+              "productId": "PROD-123",
+              "name": "Wireless Headphones",
+              "price": 199.99,
+              "quantity": 1,
+              "category": "Electronics"
+            },
+            {
+              "productId": "PROD-456",
+              "name": "USB-C Cable",
+              "price": 29.99,
+              "quantity": 2,
+              "category": "Accessories"
+            }
+          ],
+          "total": 259.97,
+          "status": "delivered"
+        }
+      ],
+      "activity": [
+        {
+          "type": "login",
+          "timestamp": "2024-01-15T09:15:00Z",
+          "ip": "192.168.1.100"
+        },
+        {
+          "type": "purchase",
+          "timestamp": "2024-01-10T14:30:00Z",
+          "amount": 259.97
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "profile": {
+        "age": 32,
+        "location": {
+          "city": "Los Angeles",
+          "country": "USA",
+          "coordinates": {
+            "lat": 34.0522,
+            "lng": -118.2437
+          }
+        },
+        "preferences": {
+          "theme": "light",
+          "notifications": false,
+          "language": "en"
+        }
+      },
+      "orders": [
+        {
+          "orderId": "ORD-002",
+          "date": "2024-01-12T16:45:00Z",
+          "items": [
+            {
+              "productId": "PROD-789",
+              "name": "Laptop Stand",
+              "price": 89.99,
+              "quantity": 1,
+              "category": "Office"
+            }
+          ],
+          "total": 89.99,
+          "status": "shipped"
+        }
+      ],
+      "activity": [
+        {
+          "type": "login",
+          "timestamp": "2024-01-15T08:30:00Z",
+          "ip": "192.168.1.101"
+        },
+        {
+          "type": "view",
+          "timestamp": "2024-01-14T20:15:00Z",
+          "productId": "PROD-789"
+        }
+      ]
+    }
+  ],
+  "products": [
+    {
+      "id": "PROD-123",
+      "name": "Wireless Headphones",
+      "description": "High-quality wireless headphones with noise cancellation",
+      "price": 199.99,
+      "category": "Electronics",
+      "inStock": true,
+      "specifications": {
+        "batteryLife": "30 hours",
+        "connectivity": ["Bluetooth 5.0", "3.5mm jack"],
+        "weight": "250g",
+        "colors": ["black", "white", "blue"]
+      },
+      "reviews": [
+        {
+          "userId": 1,
+          "rating": 5,
+          "comment": "Excellent sound quality and comfort",
+          "date": "2024-01-05T10:00:00Z"
+        },
+        {
+          "userId": 2,
+          "rating": 4,
+          "comment": "Good value for money",
+          "date": "2024-01-08T15:30:00Z"
+        }
+      ]
+    },
+    {
+      "id": "PROD-456",
+      "name": "USB-C Cable",
+      "description": "Fast charging USB-C cable, 6 feet long",
+      "price": 29.99,
+      "category": "Accessories",
+      "inStock": true,
+      "specifications": {
+        "length": "6 feet",
+        "connectors": ["USB-C", "USB-A"],
+        "powerDelivery": "100W",
+        "dataTransfer": "USB 3.0"
+      },
+      "reviews": [
+        {
+          "userId": 1,
+          "rating": 5,
+          "comment": "Works perfectly with my laptop",
+          "date": "2024-01-06T12:00:00Z"
+        }
+      ]
+    }
+  ],
+  "analytics": {
+    "totalUsers": 1000,
+    "totalOrders": 2500,
+    "totalRevenue": 125000.50,
+    "averageOrderValue": 50.00,
+    "topCategories": [
+      {
+        "name": "Electronics",
+        "count": 800,
+        "revenue": 75000.00
+      },
+      {
+        "name": "Accessories",
+        "count": 600,
+        "revenue": 30000.00
+      },
+      {
+        "name": "Office",
+        "count": 400,
+        "revenue": 20000.50
+      }
+    ],
+    "monthlyStats": [
+      {
+        "month": "2024-01",
+        "users": 1000,
+        "orders": 2500,
+        "revenue": 125000.50
+      },
+      {
+        "month": "2023-12",
+        "users": 950,
+        "orders": 2300,
+        "revenue": 115000.00
+      }
+    ]
+  },
+  "config": {
+    "features": {
+      "userRegistration": true,
+      "emailNotifications": true,
+      "socialLogin": false,
+      "twoFactorAuth": true
+    },
+    "limits": {
+      "maxFileSize": "10MB",
+      "maxUsers": 10000,
+      "rateLimit": {
+        "requests": 1000,
+        "window": "1 hour"
+      }
+    },
+    "integrations": [
+      {
+        "name": "Payment Gateway",
+        "type": "stripe",
+        "enabled": true,
+        "config": {
+          "apiKey": "sk_test_...",
+          "webhookSecret": "whsec_..."
+        }
+      },
+      {
+        "name": "Email Service",
+        "type": "sendgrid",
+        "enabled": true,
+        "config": {
+          "apiKey": "SG...",
+          "fromEmail": "noreply@example.com"
+        }
+      }
+    ]
+  }
+}

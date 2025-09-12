@@ -9,6 +9,7 @@ function useJsonStream<P>(url: string) {
     }, [eventStore]);
 
     const jsonStream = useSyncExternalStore(eventStore.subscribe, eventStore.getSnapshot);
+    
     return jsonStream;
 }
 

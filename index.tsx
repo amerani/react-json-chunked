@@ -7,12 +7,10 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(<App />);
 
 function App() {
-    const jsonStream = useJsonStream('https://microsoftedge.github.io/Demos/json-dummy-data/64KB.json') || [];
+    const jsonStream = useJsonStream('http://localhost:3001/stream-json') || {};
     return (
         <>
-            {jsonStream.length > 0 && jsonStream.map((item) => (
-                <span key={item.id}>{item.name}</span>
-            ))}
+            {<div>{JSON.stringify(jsonStream, null, 2)}</div>}
         </>   
     )
 }

@@ -10,7 +10,7 @@ export function EventStore<R>(url: string) {
     reader.addEventListener("partial", (e: Event) => {
       const custom = e as CustomEvent<any>;
       console.log("Partial object:", custom.detail);
-      currentData = custom.detail;
+      currentData = {...custom.detail};
       listeners.forEach((listener: any) => listener());
     });
     
