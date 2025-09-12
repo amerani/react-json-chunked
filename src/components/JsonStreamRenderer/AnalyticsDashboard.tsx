@@ -84,7 +84,7 @@ export const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ analytic
       </div>
 
       {/* Monthly Stats */}
-      <div className="analytics-section">
+      {/* <div className="analytics-section">
         <h3>📅 Monthly Statistics</h3>
         <div className="monthly-stats">
           {analytics?.monthlyStats?.map((month: any) => (
@@ -109,7 +109,7 @@ export const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ analytic
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

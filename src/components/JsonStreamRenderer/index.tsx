@@ -8,9 +8,22 @@ import { MetaDataPanel } from './MetaDataPanel';
 import './styles.css';
 
 interface JsonStreamRendererProps {
-  data: JsonStreamData;
+  data: JsonStreamData | null | undefined;
   className?: string;
 }
+
+const SectionLoadingSpinner: React.FC<{ message: string }> = ({ message }) => {
+  return (
+    <div className="section-loading">
+      <div className="section-spinner">
+        <div className="spinner-dot"></div>
+        <div className="spinner-dot"></div>
+        <div className="spinner-dot"></div>
+      </div>
+      <p className="section-loading-text">{message}</p>
+    </div>
+  );
+};
 
 export const JsonStreamRenderer: React.FC<JsonStreamRendererProps> = ({ 
   data, 
@@ -18,44 +31,61 @@ export const JsonStreamRenderer: React.FC<JsonStreamRendererProps> = ({
 }) => {
   return (
     <div className={`json-stream-renderer ${className}`}>
-      <div className="renderer-header">
-        <h1>JSON Stream Dashboard</h1>
-      </div>
 
       <div className="renderer-grid">
         {/* Meta Data Section */}
-        <section className="meta-section">
-          <MetaDataPanel metaData={data.metaData} />
-        </section>
-
-        {/* Analytics Section */}
-        <section className="analytics-section">
-          <AnalyticsDashboard analytics={data.analytics} />
-        </section>
+        {/* <section className="meta-section">
+          {data?.metaData ? (
+            <MetaDataPanel metaData={data.metaData} />
+          ) : (
+            <SectionLoadingSpinner message="Loading metadata..." />
+          )}
+        </section> */}
 
         {/* Users Section */}
         <section className="users-section">
-          <h2>Users ({data.users?.length})</h2>
+          <h2>Users ({data?.users?.length || 0})</h2>
           <div className="users-grid">
-            {data.users?.map((user: any) => (
-              <UserCard key={user.id} user={user} />
-            ))}
+            {data?.users && data.users.length > 0 ? (
+              data.users.map((user: any) => (
+                <UserCard key={user.id} user={user} />
+              ))
+            ) : (
+              <SectionLoadingSpinner message="Loading users..." />
+            )}
           </div>
         </section>
 
         {/* Products Section */}
         <section className="products-section">
-          <h2>Products ({data.products?.length})</h2>
+          <h2>Products ({data?.products?.length || 0})</h2>
           <div className="products-grid">
-            {data.products?.map((product: any) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+            {data?.products && data.products.length > 0 ? (
+              data.products.map((product: any) => (
+                <ProductCard key={product.id} product={product} />
+              ))
+            ) : (
+              <SectionLoadingSpinner message="Loading products..." />
+            )}
           </div>
+        </section>
+
+        {/* Analytics Section */}
+        <section className="analytics-section">
+          {data?.analytics ? (
+            <AnalyticsDashboard analytics={data.analytics} />
+          ) : (
+            <SectionLoadingSpinner message="Loading analytics..." />
+          )}
         </section>
 
         {/* Configuration Section */}
         <section className="config-section">
-          <ConfigPanel config={data.config} />
+          {data?.config ? (
+            <ConfigPanel config={data.config} />
+          ) : (
+            <SectionLoadingSpinner message="Loading configuration..." />
+          )}
         </section>
       </div>
     </div>

@@ -995,3 +995,81 @@ section h2 {
   color: #718096;
   font-size: 0.9rem;
 }
+
+/* Section Loading Spinner Styles */
+.section-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+  background: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  min-height: 120px;
+}
+
+.section-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.spinner-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  animation: bounce 1.4s ease-in-out infinite both;
+}
+
+.spinner-dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.spinner-dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+.spinner-dot:nth-child(3) {
+  animation-delay: 0s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.section-loading-text {
+  color: #4a5568;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* Responsive section loading */
+@media (max-width: 768px) {
+  .section-loading {
+    padding: 30px 15px;
+    min-height: 100px;
+  }
+  
+  .spinner-dot {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .section-loading-text {
+    font-size: 0.85rem;
+  }
+}
