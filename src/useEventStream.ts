@@ -1,25 +1,16 @@
-import { useState, useSyncExternalStore, useEffect, useMemo } from 'react';
+import { useSyncExternalStore, useEffect, useMemo } from 'react';
 import { EventStore } from './EventStore';
 
-function useJsonStream<P>(url: string, onEvent: (event: P) => string|undefined) {
-    const eventStore = useMemo(() => EventStore<P,string>(url, onEvent), [url]);
-
-    const [stream, setStream] = useState<string>();   
-    
-    const sseChunk = useSyncExternalStore(eventStore.subscribe, eventStore.getSnapshot);
+function useJsonStream<P>(url: string) {
+    const eventStore = useMemo(() => EventStore<P>(url), [url]);
 
     useEffect(() => {
-        if (sseChunk !== undefined) {
-            setStream((curStream) => {
-                if (!curStream) {
-                    return sseChunk;
-                }
-                return curStream?.concat(sseChunk);
-            })
-        }
-    }, [sseChunk]);
+        eventStore.start();
+    }, [eventStore]);
 
-    return stream;
+    const jsonStream = useSyncExternalStore(eventStore.subscribe, eventStore.getSnapshot);
+
+    return jsonStream;
 }
 
 export default useJsonStream;

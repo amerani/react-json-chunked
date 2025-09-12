@@ -1,5 +1,4 @@
-import ReactEventStream from './components/ReactEventStream'
-import TextBox from './components/TextBox'
-import useEventStream from './useEventStream'
+import ReactJsonStream from './components/ReactJsonStream'
+import useJsonStream from './useEventStream'
 
-export { ReactEventStream, TextBox, useEventStream }
+export { ReactJsonStream, useJsonStream }

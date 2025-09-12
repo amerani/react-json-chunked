@@ -1,12 +1,12 @@
 import * as clarinet from "clarinet";
 import { JSONEventParser, JSONStreamReader } from "./JsonStreamReader";
 
-export function EventStore<P,R>(url: string) {
+export function EventStore<R>(url: string) {
     let retryCount = 0;
     let currentData: R|undefined;
     const listeners = new Set();
 
-    const reader = new JSONStreamReader(url, clarinet.createStream() as JSONEventParser);
+    const reader = new JSONStreamReader(url, clarinet.createStream() as unknown as JSONEventParser);
     reader.addEventListener("partial", (e: Event) => {
       const custom = e as CustomEvent<any>;
       console.log("Partial object:", custom.detail);
@@ -29,6 +29,7 @@ export function EventStore<P,R>(url: string) {
 
     function subscribe(callback: () => void) {
       listeners.add(callback);
+
       return () => listeners.delete(callback);
     }
 
@@ -37,6 +38,7 @@ export function EventStore<P,R>(url: string) {
     }
 
     return {
+      start: () => reader.start(),
       subscribe,
       getSnapshot,
     }
