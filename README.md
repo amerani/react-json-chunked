@@ -1,6 +1,9 @@
 # React JSON Chunked
 
-A React library for streaming and processing JSON data using chunked Transfer-Encoding. This library provides a React hook that allows you to consume JSON data as it streams from a server, enabling real-time updates and efficient handling of large datasets.
+A React library for streaming and processing JSON data using chunked Transfer-Encoding. This library provides a hook that allows you to consume partial JSON as it streams from a server, enabling real-time updates and efficient handling of large datasets.
+
+## Demo
+![Demo of streaming UI](./demo.gif)
 
 ## Features
 
@@ -134,13 +137,6 @@ interface ApiResponse {
 const streamData = useJsonStream<ApiResponse>('/api/stream');
 // streamData is typed as ApiResponse | undefined
 ```
-
-## Performance Considerations
-
-- The library processes JSON incrementally, making it suitable for large datasets
-- Memory usage is optimized by processing data as it arrives
-- React's `useSyncExternalStore` ensures efficient re-rendering
-- The tokenizer handles partial JSON gracefully
 
 ## License
 
