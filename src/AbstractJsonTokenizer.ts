@@ -1,4 +1,4 @@
-abstract class AbstractJsonTokenizer {
+export abstract class AbstractJsonTokenizer {
     // Core events (all optional so parser can choose what it emits)
     onopenobject?: (key?: string) => void;
     onkey?: (key: string) => void;
@@ -11,5 +11,3 @@ abstract class AbstractJsonTokenizer {
     // Feed more text into the parser
     abstract write(chunk: string): void;
 }
-
-export default AbstractJsonTokenizer;

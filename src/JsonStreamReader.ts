@@ -1,23 +1,21 @@
-import AbstractJsonTokenizer from "./AbstractJsonTokenizer";
+import { AbstractJsonTokenizer } from "./AbstractJsonTokenizer";
+import { AbstractJsonStreamReader } from "./AbstractJsonStreamReader";
 
-export class JsonStreamReader extends EventTarget {
-    private url: string;
+
+export class JsonStreamReader extends AbstractJsonStreamReader {
     private decoder: TextDecoder;
-    private tokenizer: AbstractJsonTokenizer;
     private stack: any[];
     private currentKey: string | null;
     private root: any;
   
-    constructor(url: string, eventParser: AbstractJsonTokenizer) {
-      super();
-      this.url = url;
+    constructor(url: string|URL, tokenizer: AbstractJsonTokenizer) {
+      super(url, tokenizer);
       this.decoder = new TextDecoder();
   
       this.stack = [];
       this.currentKey = null;
       this.root = null;
   
-      this.tokenizer = eventParser;
       this._wireParser();
     }
   

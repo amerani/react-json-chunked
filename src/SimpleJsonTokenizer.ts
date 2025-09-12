@@ -1,4 +1,4 @@
-import AbstractJsonTokenizer from "./AbstractJsonTokenizer";
+import { AbstractJsonTokenizer } from "./AbstractJsonTokenizer";
 
 export class SimpleJsonTokenizer implements AbstractJsonTokenizer {
   onopenobject?: (key?: string) => void;

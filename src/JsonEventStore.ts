@@ -1,7 +1,7 @@
 import { JsonStreamReader } from "./JsonStreamReader";
 import { SimpleJsonTokenizer } from "./SimpleJsonTokenizer";
 
-export function EventStore<R>(url: string) {
+export function JsonEventStore<R>(url: string) {
     let retryCount = 0;
     let currentData: R|undefined;
     const listeners = new Set();
