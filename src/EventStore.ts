@@ -1,7 +1,31 @@
-export function EventStore<P,R>(url: string, onEvent: (event: P) => R|undefined) {
+import * as clarinet from "clarinet";
+import { JSONEventParser, JSONStreamReader } from "./JsonStreamReader";
+
+export function EventStore<P,R>(url: string) {
     let retryCount = 0;
     let currentData: R|undefined;
     const listeners = new Set();
+
+    const reader = new JSONStreamReader(url, clarinet.createStream() as JSONEventParser);
+    reader.addEventListener("partial", (e: Event) => {
+      const custom = e as CustomEvent<any>;
+      console.log("Partial object:", custom.detail);
+      currentData = custom.detail;
+      listeners.forEach((listener: any) => listener());
+    });
+    
+    reader.addEventListener("end", () => {
+      console.log("Stream complete.");
+      currentData = undefined;
+      listeners.forEach((listener: any) => listener());
+    });
+
+    reader.addEventListener("error", () => {
+      retryCount++;
+      if (retryCount >= 3) {
+        retryCount = 0;
+      }
+    });
 
     function subscribe(callback: () => void) {
       listeners.add(callback);
@@ -11,31 +35,6 @@ export function EventStore<P,R>(url: string, onEvent: (event: P) => R|undefined)
     function getSnapshot() {
       return currentData;
     }
-
-    const eventSource = new EventSource(url)
-
-    eventSource.onmessage = (event: MessageEvent) => {
-      const newData = JSON.parse(event.data) as P;
-      const parsedData = onEvent(newData);
-      if (parsedData === undefined) {
-        currentData = undefined;
-        retryCount = 0;
-        eventSource.close();
-        return;
-      }
-      else if (parsedData) {
-        currentData = parsedData;  
-        listeners.forEach((listener: any) => listener());
-      }
-    };
-
-    eventSource.onerror = () => {
-      retryCount++;
-      if (retryCount >= 3) {
-        retryCount = 0;
-        eventSource.close();
-      }
-    };
 
     return {
       subscribe,

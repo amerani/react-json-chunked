@@ -1,17 +1,17 @@
 import React from 'react';
 import useEventStream from '../../useEventStream';
 
-interface ReactEventStreamProps<T> {
+interface ReactJsonStreamProps<T> {
     url: string;
     onEvent: (event: T) => string|undefined;
     render: (stream: string) => React.ReactNode;
 }
 
-function ReactEventStream<T>({ 
+function ReactJsonStream<T>({ 
     url, 
     onEvent, 
     render 
-}: ReactEventStreamProps<T>) {
+}: ReactJsonStreamProps<T>) {
     const stream = useEventStream<T>(
         url, 
         onEvent
@@ -20,4 +20,4 @@ function ReactEventStream<T>({
     return render(stream);
 }
 
-export default ReactEventStream;
+export default ReactJsonStream;
