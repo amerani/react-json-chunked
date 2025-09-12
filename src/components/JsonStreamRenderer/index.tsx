@@ -80,13 +80,13 @@ export const JsonStreamRenderer: React.FC<JsonStreamRendererProps> = ({
         </section>
 
         {/* Configuration Section */}
-        <section className="config-section">
+        {/* <section className="config-section">
           {data?.config ? (
             <ConfigPanel config={data.config} />
           ) : (
             <SectionLoadingSpinner message="Loading configuration..." />
           )}
-        </section>
+        </section> */}
       </div>
     </div>
   );

@@ -193,56 +193,6 @@
         "count": 400,
         "revenue": 20000.50
       }
-    ],
-    "monthlyStats": [
-      {
-        "month": "2024-01",
-        "users": 1000,
-        "orders": 2500,
-        "revenue": 125000.50
-      },
-      {
-        "month": "2023-12",
-        "users": 950,
-        "orders": 2300,
-        "revenue": 115000.00
-      }
-    ]
-  },
-  "config": {
-    "features": {
-      "userRegistration": true,
-      "emailNotifications": true,
-      "socialLogin": false,
-      "twoFactorAuth": true
-    },
-    "limits": {
-      "maxFileSize": "10MB",
-      "maxUsers": 10000,
-      "rateLimit": {
-        "requests": 1000,
-        "window": "1 hour"
-      }
-    },
-    "integrations": [
-      {
-        "name": "Payment Gateway",
-        "type": "stripe",
-        "enabled": true,
-        "config": {
-          "apiKey": "sk_test_...",
-          "webhookSecret": "whsec_..."
-        }
-      },
-      {
-        "name": "Email Service",
-        "type": "sendgrid",
-        "enabled": true,
-        "config": {
-          "apiKey": "SG...",
-          "fromEmail": "noreply@example.com"
-        }
-      }
     ]
   }
 }
