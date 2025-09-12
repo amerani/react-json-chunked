@@ -1,5 +1,5 @@
 import React from 'react';
-import { Analytics } from '../JsonStreamTypes';
+import { Analytics } from '../types/JsonStreamTypes';
 
 interface AnalyticsDashboardProps {
   analytics: Analytics;

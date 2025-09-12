@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 // Path to the large JSON file
-const largeJsonFilePath = path.join(__dirname, '../../large-data.json');
+const largeJsonFilePath = path.join(__dirname, '../large-data.json');
 
 // Large JSON streaming endpoint
 app.get('/stream-json', (req, res) => {

@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import * as ReactDOM from 'react-dom/client'
-import { JsonStreamRenderer } from './demo/JsonStreamRenderer'
-import { RawJsonViewer } from './demo/RawJsonViewer'
+import { JsonStreamRenderer, RawJsonViewer, JsonStreamData } from './demo/client/index.js'
 import { useJsonStream } from './dist/index.js'
 import './index.css'
 
@@ -9,18 +8,17 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(<App />);
 
 function App() {
-    const jsonStream = useJsonStream('http://localhost:3001/stream-json') || {};
+    const jsonStream = useJsonStream<JsonStreamData>('http://localhost:3001/stream-json');
 
     return (
         <div className="app-container">
             <div className={`app-content both`}>
-                    <div className="ui-panel">
-                        <JsonStreamRenderer data={jsonStream} />
-                    </div>
-                
-                    <div className="json-panel">
-                        <RawJsonViewer data={jsonStream} />
-                    </div>
+                <div className="ui-panel">
+                    <JsonStreamRenderer data={jsonStream} />
+                </div>
+                <div className="json-panel">
+                    <RawJsonViewer data={jsonStream} />
+                </div>
             </div>
         </div>
     )

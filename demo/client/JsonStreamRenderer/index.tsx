@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { JsonStreamData } from '../JsonStreamTypes';
+import { JsonStreamData } from '../types/JsonStreamTypes';
 import { UserCard } from './UserCard'
 import { ProductCard } from './ProductCard';
 import { AnalyticsDashboard } from './AnalyticsDashboard';

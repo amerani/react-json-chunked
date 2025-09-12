@@ -153,8 +153,7 @@ export interface MetaData {
 
 // Main JSON stream data type
 export interface JsonStreamData {
-  metaData: MetaData;
-  metadata: MetaData; // Note: there's a duplicate in the JSON
+  metadata: MetaData;
   users: User[];
   products: Product[];
   analytics: Analytics;
