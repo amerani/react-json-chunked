@@ -1,6 +1,6 @@
-import { JSONEventParser } from "./JsonStreamReader";
+import AbstractJsonTokenizer from "./AbstractJsonTokenizer";
 
-export class SimpleJSONParser implements JSONEventParser {
+export class SimpleJsonTokenizer implements AbstractJsonTokenizer {
   onopenobject?: (key?: string) => void;
   onkey?: (key: string) => void;
   onvalue?: (value: any) => void;

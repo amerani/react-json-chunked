@@ -1,3 +1,3 @@
-import useJsonStream from './useEventStream'
+import useJsonStream from './useJsonStream';
 
 export { useJsonStream }

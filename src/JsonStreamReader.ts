@@ -1,26 +1,14 @@
-export interface JSONEventParser {
-    // Core events (all optional so parser can choose what it emits)
-    onopenobject?: (key?: string) => void;
-    onkey?: (key: string) => void;
-    onvalue?: (value: any) => void;
-    oncloseobject?: () => void;
-    onopenarray?: () => void;
-    onclosearray?: () => void;
-    onerror?: (err: Error) => void;
-  
-    // Feed more text into the parser
-    write(chunk: string): void;
-}
+import AbstractJsonTokenizer from "./AbstractJsonTokenizer";
 
-export class JSONStreamReader extends EventTarget {
+export class JsonStreamReader extends EventTarget {
     private url: string;
     private decoder: TextDecoder;
-    private parser: JSONEventParser;
+    private tokenizer: AbstractJsonTokenizer;
     private stack: any[];
     private currentKey: string | null;
     private root: any;
   
-    constructor(url: string, eventParser: JSONEventParser) {
+    constructor(url: string, eventParser: AbstractJsonTokenizer) {
       super();
       this.url = url;
       this.decoder = new TextDecoder();
@@ -29,12 +17,12 @@ export class JSONStreamReader extends EventTarget {
       this.currentKey = null;
       this.root = null;
   
-      this.parser = eventParser;
+      this.tokenizer = eventParser;
       this._wireParser();
     }
   
     private _wireParser() {
-      this.parser.onopenobject = (key?: string) => {
+      this.tokenizer.onopenobject = (key?: string) => {
         const obj: Record<string, any> = {};
         if (this.stack.length === 0) {
           this.root = obj;
@@ -48,22 +36,22 @@ export class JSONStreamReader extends EventTarget {
         }
       };
   
-      this.parser.onkey = (key: string) => {
+      this.tokenizer.onkey = (key: string) => {
         this.currentKey = key;
       };
   
-      this.parser.onvalue = (value: any) => {
+      this.tokenizer.onvalue = (value: any) => {
         this._insertValue(value);
         this._emitPartial();
       };
   
-      this.parser.oncloseobject = () => {
+      this.tokenizer.oncloseobject = () => {
         this.stack.pop();
         this.currentKey = null;
         this._emitPartial();
       };
   
-      this.parser.onopenarray = () => {
+      this.tokenizer.onopenarray = () => {
         const arr: any[] = [];
         if (this.stack.length === 0) {
           this.root = arr;
@@ -73,12 +61,12 @@ export class JSONStreamReader extends EventTarget {
         this.stack.push(arr);
       };
   
-      this.parser.onclosearray = () => {
+      this.tokenizer.onclosearray = () => {
         this.stack.pop();
         this._emitPartial();
       };
   
-      this.parser.onerror = (err: Error) => {
+      this.tokenizer.onerror = (err: Error) => {
         this.dispatchEvent(new CustomEvent("error", { detail: err }));
       };
     }
@@ -98,6 +86,18 @@ export class JSONStreamReader extends EventTarget {
         new CustomEvent("partial", { detail: this.root })
       );
     }
+
+    onpartialjson(callback: (event: Event) => void) {
+      this.addEventListener("partial", callback);
+    }
+
+    onend(callback: (event: Event) => void) {
+      this.addEventListener("end", callback);
+    }
+
+    onerror(callback: (event: Event) => void) {
+      this.addEventListener("error", callback);
+    }
   
     async start(): Promise<void> {
       const response = await fetch(this.url);
@@ -108,7 +108,7 @@ export class JSONStreamReader extends EventTarget {
           this.dispatchEvent(new Event("end"));
           return;
         }
-        this.parser.write(this.decoder.decode(value, { stream: true }));
+        this.tokenizer.write(this.decoder.decode(value, { stream: true }));
         reader.read().then(pump);
       };
   
