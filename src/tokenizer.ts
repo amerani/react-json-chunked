@@ -28,6 +28,8 @@ export class SimpleJSONParser implements JSONEventParser {
         if (c === "{") {
           this.stack.push("object");
           this.onopenobject?.();
+          // Reset currentKey when entering a new object
+          this.currentKey = null;
           i++;
         } else if (c === "}") {
           this.stack.pop();
@@ -47,9 +49,11 @@ export class SimpleJSONParser implements JSONEventParser {
           if (end === -1) break; // Wait for more data
           const str = this.buffer.slice(i + 1, end);
           if (this.stack[this.stack.length - 1] === "object" && this.currentKey === null) {
+            // This is a key
             this.currentKey = str;
             this.onkey?.(str);
           } else {
+            // This is a value
             this.onvalue?.(str);
             this.currentKey = null;
           }
@@ -66,8 +70,17 @@ export class SimpleJSONParser implements JSONEventParser {
           this.onvalue?.(value);
           this.currentKey = null;
           i += token.length;
+        } else if (c === ":") {
+          // Colon separates key from value - don't reset currentKey yet
+          i++;
+        } else if (c === ",") {
+          // Comma separates key-value pairs - reset currentKey if in object
+          if (this.stack[this.stack.length - 1] === "object") {
+            this.currentKey = null;
+          }
+          i++;
         } else {
-          // Skip separators: colon, commas, spaces, newlines
+          // Skip other separators: spaces, newlines
           i++;
         }
       }

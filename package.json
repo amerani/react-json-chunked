@@ -18,7 +18,9 @@
     "build": "vite build",
     "dev": "npm-run-all --parallel --print-label watch:**",
     "watch:src": "vite build --watch",
-    "watch:dist": "nodemon -w dist --exec 'vite'"
+    "watch:dist": "nodemon -w dist --exec 'vite'",
+    "test": "vitest",
+    "test:run": "vitest run"
   },
   "author": "Alek Merani",
   "license": "MIT",

@@ -1,4 +1,10 @@
 {
+"metaData": {
+    "version": "1.0.0",
+    "generatedAt": "2024-01-15T10:30:00Z",
+    "description": "Large JSON dataset for streaming tests",
+    "totalRecords": 1000
+    },
   "metadata": {
     "version": "1.0.0",
     "generatedAt": "2024-01-15T10:30:00Z",
