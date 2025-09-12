@@ -1,5 +1,5 @@
 {
-  "name": "react-json-stream",
+  "name": "react-ui-stream",
   "version": "0.0.1",
   "description": "A React component for streaming JSON",
   "type": "module",
