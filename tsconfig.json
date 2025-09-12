@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "src/types/JsonStreamTypes.ts"],
+  "include": ["src", "demo/JsonStreamTypes.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

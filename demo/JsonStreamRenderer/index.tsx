@@ -1,10 +1,8 @@
 import React, { useRef, useEffect } from 'react';
-import { JsonStreamData } from '../../types/JsonStreamTypes';
+import { JsonStreamData } from '../JsonStreamTypes';
 import { UserCard } from './UserCard'
 import { ProductCard } from './ProductCard';
 import { AnalyticsDashboard } from './AnalyticsDashboard';
-import { ConfigPanel } from './ConfigPanel';
-import { MetaDataPanel } from './MetaDataPanel';
 import './styles.css';
 
 interface JsonStreamRendererProps {
@@ -38,7 +36,7 @@ export const JsonStreamRenderer: React.FC<JsonStreamRendererProps> = ({
       const scrollToBottom = () => {
         // Find the scrollable parent panel (.ui-panel)
         const uiPanel = containerRef.current?.closest('.ui-panel') as HTMLElement;
-        if (uiPanel) {
+        if (uiPanel && data.users && data.users.length > 0) {
           uiPanel.scrollTop = uiPanel.scrollHeight;
         }
       };

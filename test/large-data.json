@@ -1,10 +1,4 @@
 {
-"metaData": {
-    "version": "1.0.0",
-    "generatedAt": "2024-01-15T10:30:00Z",
-    "description": "Large JSON dataset for streaming tests",
-    "totalRecords": 1000
-    },
   "metadata": {
     "version": "1.0.0",
     "generatedAt": "2024-01-15T10:30:00Z",
@@ -31,43 +25,7 @@
           "notifications": true,
           "language": "en"
         }
-      },
-      "orders": [
-        {
-          "orderId": "ORD-001",
-          "date": "2024-01-10T14:30:00Z",
-          "items": [
-            {
-              "productId": "PROD-123",
-              "name": "Wireless Headphones",
-              "price": 199.99,
-              "quantity": 1,
-              "category": "Electronics"
-            },
-            {
-              "productId": "PROD-456",
-              "name": "USB-C Cable",
-              "price": 29.99,
-              "quantity": 2,
-              "category": "Accessories"
-            }
-          ],
-          "total": 259.97,
-          "status": "delivered"
-        }
-      ],
-      "activity": [
-        {
-          "type": "login",
-          "timestamp": "2024-01-15T09:15:00Z",
-          "ip": "192.168.1.100"
-        },
-        {
-          "type": "purchase",
-          "timestamp": "2024-01-10T14:30:00Z",
-          "amount": 259.97
-        }
-      ]
+      }
     },
     {
       "id": 2,
@@ -88,36 +46,19 @@
           "notifications": false,
           "language": "en"
         }
-      },
-      "orders": [
-        {
-          "orderId": "ORD-002",
-          "date": "2024-01-12T16:45:00Z",
-          "items": [
-            {
-              "productId": "PROD-789",
-              "name": "Laptop Stand",
-              "price": 89.99,
-              "quantity": 1,
-              "category": "Office"
-            }
-          ],
-          "total": 89.99,
-          "status": "shipped"
+      }
+    },
+    {
+        "id": 3,
+        "name": "Alice Doe",
+        "email": "alice.doe@example.com",
+        "profile": {
+          "age": 25,
+          "location": {
+            "city": "London",
+            "country": "UK"
+          }
         }
-      ],
-      "activity": [
-        {
-          "type": "login",
-          "timestamp": "2024-01-15T08:30:00Z",
-          "ip": "192.168.1.101"
-        },
-        {
-          "type": "view",
-          "timestamp": "2024-01-14T20:15:00Z",
-          "productId": "PROD-789"
-        }
-      ]
     }
   ],
   "products": [
@@ -192,6 +133,16 @@
         "name": "Office",
         "count": 400,
         "revenue": 20000.50
+      },
+      {
+        "name": "Books",
+        "count": 200,
+        "revenue": 10000.00
+      },
+      {
+        "name": "Music",
+        "count": 100,
+        "revenue": 5000.00
       }
     ]
   }

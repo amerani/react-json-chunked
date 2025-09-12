@@ -1,5 +1,5 @@
 import React from 'react';
-import { Analytics } from '../../types/JsonStreamTypes';
+import { Analytics } from '../JsonStreamTypes';
 
 interface AnalyticsDashboardProps {
   analytics: Analytics;
@@ -36,22 +36,6 @@ export const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({ analytic
           <div className="metric-content">
             <div className="metric-value">{formatNumber(analytics?.totalOrders)}</div>
             <div className="metric-label">Total Orders</div>
-          </div>
-        </div>
-        
-        <div className="metric-card">
-          <div className="metric-icon">💰</div>
-          <div className="metric-content">
-            <div className="metric-value">{formatCurrency(analytics?.totalRevenue)}</div>
-            <div className="metric-label">Total Revenue</div>
-          </div>
-        </div>
-        
-        <div className="metric-card">
-          <div className="metric-icon">📈</div>
-          <div className="metric-content">
-            <div className="metric-value">{formatCurrency(analytics?.averageOrderValue)}</div>
-            <div className="metric-label">Avg Order Value</div>
           </div>
         </div>
       </div>

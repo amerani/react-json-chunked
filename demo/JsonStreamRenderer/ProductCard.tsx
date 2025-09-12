@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Product } from '../../types/JsonStreamTypes';
+import { Product } from '../JsonStreamTypes';
 
 interface ProductCardProps {
   product: Product;
