@@ -35,7 +35,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               {product.category}
             </span>
             <span className={`stock-status ${product.inStock ? 'in-stock' : 'out-of-stock'}`}>
-              {product.inStock ? '✅ In Stock' : '❌ Out of Stock'}
+              {product.inStock ? '✅ In Stock' : ''}
             </span>
           </div>
         </div>

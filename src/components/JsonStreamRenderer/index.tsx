@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { JsonStreamData } from '../../types/JsonStreamTypes';
 import { UserCard } from './UserCard'
 import { ProductCard } from './ProductCard';
@@ -29,8 +29,33 @@ export const JsonStreamRenderer: React.FC<JsonStreamRendererProps> = ({
   data, 
   className = '' 
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll effect when data changes
+  useEffect(() => {
+    if (data) {
+      // Use multiple approaches to ensure scrolling works
+      const scrollToBottom = () => {
+        // Find the scrollable parent panel (.ui-panel)
+        const uiPanel = containerRef.current?.closest('.ui-panel') as HTMLElement;
+        if (uiPanel) {
+          uiPanel.scrollTop = uiPanel.scrollHeight;
+        }
+      };
+
+      // Try immediate scroll
+      scrollToBottom();
+      
+      // Try with requestAnimationFrame
+      requestAnimationFrame(scrollToBottom);
+      
+      // Try with a small delay as fallback
+      setTimeout(scrollToBottom, 10);
+    }
+  }, [data]);
+
   return (
-    <div className={`json-stream-renderer ${className}`}>
+    <div className={`json-stream-renderer ${className}`} ref={containerRef}>
 
       <div className="renderer-grid">
         {/* Meta Data Section */}
