@@ -1,34 +1,41 @@
 import type { UserConfig } from 'vite'
-import { dirname, resolve } from 'node:path'
+import path, { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { globSync } from 'glob'
 import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 import dts from 'unplugin-dts/vite'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
-    plugins: [dts()],
+    plugins: [
+        react(), 
+        dts()
+    ],
     server: {
         open: true,
-    },
-    css: {
-        modules: {
-            localsConvention: 'camelCase',
-            globalModulePaths: [new RegExp(resolve(__dirname, 'src/global.d.ts'))],
-        }
     },
     build: {
         lib: {
             entry: resolve(__dirname, 'src/index.ts'),
-            name: 'react-json-stream',
-            fileName: 'ReactJSONStream',
-            cssFileName: 'ReactJSONStream.styles',
-            formats: ['es', 'cjs', 'umd'],
+            formats: ['es'],
         },
         sourcemap: true,
         rollupOptions: {
             external: ['react', 'react-dom'],
+            input: Object.fromEntries(
+                globSync('src/**/*.ts').map(file => [
+                    path.relative(
+                        'src',
+                        file.slice(0, file.length - path.extname(file).length)
+                    ),
+                    fileURLToPath(new URL(file, import.meta.url))
+                ])
+            ),
             output: {
+                entryFileNames: '[name].js',
+                assetFileNames: 'assets/[name][extname]',
                 globals: {
                     react: 'React',
                     'react-dom': 'ReactDOM',
