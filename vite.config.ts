@@ -25,6 +25,7 @@ export default defineConfig({
             cssFileName: 'ReactJSONStream.styles',
             formats: ['es', 'cjs', 'umd'],
         },
+        sourcemap: true,
         rollupOptions: {
             external: ['react', 'react-dom'],
             output: {

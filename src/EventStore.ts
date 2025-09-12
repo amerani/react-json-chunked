@@ -1,12 +1,12 @@
-import * as clarinet from "clarinet";
-import { JSONEventParser, JSONStreamReader } from "./JsonStreamReader";
+import { JSONStreamReader } from "./JsonStreamReader";
+import { SimpleJSONParser } from "./tokenizer";
 
 export function EventStore<R>(url: string) {
     let retryCount = 0;
     let currentData: R|undefined;
     const listeners = new Set();
 
-    const reader = new JSONStreamReader(url, clarinet.createStream() as unknown as JSONEventParser);
+    const reader = new JSONStreamReader(url, new SimpleJSONParser());
     reader.addEventListener("partial", (e: Event) => {
       const custom = e as CustomEvent<any>;
       console.log("Partial object:", custom.detail);
@@ -17,7 +17,6 @@ export function EventStore<R>(url: string) {
     reader.addEventListener("end", () => {
       console.log("Stream complete.");
       currentData = undefined;
-      listeners.forEach((listener: any) => listener());
     });
 
     reader.addEventListener("error", () => {
