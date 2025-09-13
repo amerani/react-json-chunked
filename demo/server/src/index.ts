@@ -44,7 +44,7 @@ app.get('/stream-json', (req, res) => {
   });
   
   let chunkCount = 0;
-  const delayMs = 100; // 200ms delay between chunks
+  const delayMs = 100; // 100ms delay between chunks
   
   // Handle stream events
   fileStream.on('data', (chunk) => {

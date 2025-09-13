@@ -88,21 +88,48 @@ The library consists of several key components:
 
 ## Server Requirements
 
-Your server should support chunked Transfer-Encoding. Here's a simple Node.js example:
+Your server should support chunked Transfer-Encoding. Here's a Node.js simulation:
 
 ```javascript
 app.get('/stream-json', (req, res) => {
-  res.setHeader('Content-Type', 'application/json');
-  res.setHeader('Transfer-Encoding', 'chunked');
+
+  // Set streaming headers
+  res.writeHead(200, {
+    'Content-Type': 'application/json',
+    'Cache-Control': 'no-cache',
+    'Connection': 'keep-alive',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Cache-Control',
+    'Transfer-Encoding': 'chunked'
+  });
+
+  // Create a readable stream from the file with smaller chunks
+  const fileStream = createReadStream(largeJsonFilePath, { 
+    encoding: 'utf8',
+    highWaterMark: 64 // 64 bytes chunk
+  });  
   
-  // Stream your JSON data
-  const data = { users: [...], metadata: {...} };
-  res.write(JSON.stringify(data));
-  res.end();
+  let chunkCount = 0;
+  const delayMs = 100; // 100ms delay between chunks
+  
+  // Handle stream events
+  fileStream.on('data', (chunk) => {
+    chunkCount++;
+    
+    // Add delay before writing each chunk
+    setTimeout(() => {
+      res.write(chunk);
+    }, chunkCount * delayMs);
+  });
+
+  fileStream.on('end', () => {
+    // Wait for the last chunk to be sent before ending
+    setTimeout(() => {
+      res.end();
+    }, (chunkCount + 1) * delayMs);
+  });
 });
 ```
-
-See example in [demo](./demo/server/src/index.ts) for simulating a slow JSON stream when reading a large JSON file from the filesystem. 
 
 ## TypeScript Support
 
