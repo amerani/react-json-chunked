@@ -3,7 +3,7 @@
 A React library for streaming and processing JSON data using chunked Transfer-Encoding. This library provides a hook that allows you to consume partial JSON as it streams from a server, enabling real-time updates and efficient handling of large datasets.
 
 ## Demo
-![Demo of streaming UI](./demo.gif)
+![Demo of streaming UI](https://raw.githubusercontent.com/amerani/react-json-chunked/master/demo.gif)
 
 ## Features
 
@@ -70,7 +70,7 @@ A React hook that streams JSON data from the specified URL.
 - `url` (string): The URL to fetch JSON data from
 
 **Returns:**
-- `T | undefined`: The current state of the JSON data, or `undefined` while loading
+- `T | undefined`: The current state of the JSON data (initially `undefined`)
 
 **Generic Type:**
 - `T`: The expected shape of your JSON data
@@ -85,21 +85,6 @@ The library consists of several key components:
 2. **SimpleJsonTokenizer**: Tokenizes incoming JSON chunks into parseable events
 3. **JsonEventStore**: Manages the state and provides React integration
 4. **useJsonStream**: The React hook that ties everything together
-
-### Data Flow
-
-1. The `useJsonStream` hook creates a `JsonEventStore` instance
-2. The store initializes a `JsonStreamReader` with a `SimpleJsonTokenizer`
-3. The reader fetches data from the URL and processes it incrementally
-4. As JSON tokens are parsed, partial data is emitted and stored
-5. React components re-render automatically when new data arrives
-
-### Error Handling
-
-The library includes automatic retry logic:
-- Up to 3 retry attempts on connection errors
-- Automatic retry count reset after successful connections
-- Error events are properly handled and can be monitored
 
 ## Server Requirements
 
@@ -116,6 +101,8 @@ app.get('/stream-json', (req, res) => {
   res.end();
 });
 ```
+
+See example in [demo](./demo/server/src/index.ts) for simulating a slow JSON stream when reading a large JSON file from the filesystem. 
 
 ## TypeScript Support
 
