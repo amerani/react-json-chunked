@@ -6,7 +6,11 @@ function useJsonStream<P>(url: string|URL|Request, fetchOptions?: RequestInit) {
 
     useEffect(() => {
         (async () => {
-            await eventStore.start();
+            try {
+                await eventStore.start();
+            } catch (error) {
+                console.error(error);
+            }
         })();
     }, [eventStore]);
 
