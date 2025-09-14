@@ -20,6 +20,10 @@
   },
   "author": "Alek Merani",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/am/react-json-chunked.git"
+  },
   "peerDependencies": {
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
