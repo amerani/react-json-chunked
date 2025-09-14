@@ -31,6 +31,7 @@ jobs:
           setupGitUser: false
           commitMode: github-api
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
