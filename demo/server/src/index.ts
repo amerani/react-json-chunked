@@ -46,23 +46,27 @@ app.get('/stream-json', (req, res) => {
   let chunkCount = 0;
   const delayMs = 100; // 100ms delay between chunks
   
+  const timeouts: NodeJS.Timeout[] = [];
+
   // Handle stream events
   fileStream.on('data', (chunk) => {
     chunkCount++;
     
     // Add delay before writing each chunk
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       res.write(chunk);
       console.log(`Sent chunk ${chunkCount}, size: ${chunk.length} bytes`);
     }, chunkCount * delayMs);
+    timeouts.push(timeout);
   });
 
   fileStream.on('end', () => {
     // Wait for the last chunk to be sent before ending
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       console.log(`JSON file streaming completed - sent ${chunkCount} chunks`);
       res.end();
     }, (chunkCount + 1) * delayMs);
+    timeouts.push(timeout);
   });
 
   fileStream.on('error', (error) => {
@@ -77,11 +81,13 @@ app.get('/stream-json', (req, res) => {
   req.on('close', () => {
     console.log('JSON streaming connection closed');
     fileStream.destroy();
+    timeouts.forEach(timeout => clearTimeout(timeout));
   });
 
   req.on('error', (error) => {
     console.error('JSON streaming connection error:', error);
     fileStream.destroy();
+    timeouts.forEach(timeout => clearTimeout(timeout));
   });
 });
 

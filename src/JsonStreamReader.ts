@@ -8,8 +8,8 @@ export class JsonStreamReader extends AbstractJsonStreamReader {
     private currentKey: string | null;
     private root: any;
   
-    constructor(url: string|URL, tokenizer: AbstractJsonTokenizer) {
-      super(url, tokenizer);
+    constructor(url: string|URL, tokenizer: AbstractJsonTokenizer, fetchOptions: RequestInit) {
+      super(url, tokenizer, fetchOptions);
       this.decoder = new TextDecoder();
   
       this.stack = [];
@@ -98,7 +98,7 @@ export class JsonStreamReader extends AbstractJsonStreamReader {
     }
   
     async start(): Promise<void> {
-      const response = await fetch(this.url);
+      const response = await fetch(this.url, this.fetchOptions);
       const reader = response.body!.getReader();
   
       const pump = ({ done, value }: ReadableStreamReadResult<Uint8Array>): void => {
