@@ -1,12 +1,12 @@
 # react-json-chunked
 
-## 0.3.2
+## 0.3.6
 
 ### Patch Changes
 
-- test changesets
+- setup change sets/logs
 
-## 0.3.1
+## 0.3.5
 
 - 🎣 **Custom Hook**: Exports a custom `useJsonStream` hook for consuming JSON chunks
 - ⚛️ **React Integration**: Built with native `useSyncExternalStore` hook for optimal rendering

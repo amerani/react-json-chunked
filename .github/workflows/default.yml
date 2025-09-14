@@ -2,7 +2,7 @@ name: Default Workflow
 
 on:
   push:
-    branches:
+    branches-ignore:
       - main
 
 jobs:
