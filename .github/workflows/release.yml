@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    uses: ./.github/workflows/ci-build.yml
+    uses: .github/workflows/ci-build.yml
   release:
     uses: changesets/action@v1
     with:
