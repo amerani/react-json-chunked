@@ -16,6 +16,8 @@ jobs:
         uses: changesets/action@v1
         with:
           publish: npm run release
+          setupGitUser: false
+          commitMode: github-api
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
