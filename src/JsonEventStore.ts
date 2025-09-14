@@ -1,12 +1,16 @@
 import { JsonStreamReader } from "./JsonStreamReader";
 import { SimpleJsonTokenizer } from "./SimpleJsonTokenizer";
 
-export function JsonEventStore<R>(url: string, fetchOptions: RequestInit) {
+export function JsonEventStore<R>(url: string|URL|Request, fetchOptions: RequestInit) {
     let retryCount = 0;
     let currentData: R|undefined;
     const listeners = new Set();
 
-    const reader = new JsonStreamReader(url, new SimpleJsonTokenizer(), fetchOptions);
+    const reader = new JsonStreamReader({
+      url, 
+      fetchOptions,
+      tokenizer: new SimpleJsonTokenizer(), 
+    });
 
     reader.onpartialjson((e: Event) => {
       const custom = e as CustomEvent<any>;

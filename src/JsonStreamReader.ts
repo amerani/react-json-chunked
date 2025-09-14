@@ -1,6 +1,11 @@
 import { AbstractJsonTokenizer } from "./AbstractJsonTokenizer";
 import { AbstractJsonStreamReader } from "./AbstractJsonStreamReader";
 
+interface JsonStreamReaderOptions {
+  url: string|URL|Request;
+  fetchOptions: RequestInit;
+  tokenizer: AbstractJsonTokenizer;
+}
 
 export class JsonStreamReader extends AbstractJsonStreamReader {
     private decoder: TextDecoder;
@@ -8,8 +13,8 @@ export class JsonStreamReader extends AbstractJsonStreamReader {
     private currentKey: string | null;
     private root: any;
   
-    constructor(url: string|URL, tokenizer: AbstractJsonTokenizer, fetchOptions: RequestInit) {
-      super(url, tokenizer, fetchOptions);
+    constructor(options: JsonStreamReaderOptions) {
+      super(options.url, options.tokenizer, options.fetchOptions);
       this.decoder = new TextDecoder();
   
       this.stack = [];

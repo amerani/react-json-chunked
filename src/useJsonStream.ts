@@ -1,7 +1,7 @@
 import { useSyncExternalStore, useEffect, useMemo } from 'react';
 import { JsonEventStore } from './JsonEventStore';
 
-function useJsonStream<P>(url: string, fetchOptions?: RequestInit) {
+function useJsonStream<P>(url: string|URL|Request, fetchOptions?: RequestInit) {
     const eventStore = useMemo(() => JsonEventStore<P>(url, fetchOptions || {}), [url]);
 
     useEffect(() => {

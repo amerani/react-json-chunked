@@ -1,10 +1,10 @@
 import { AbstractJsonTokenizer } from "./AbstractJsonTokenizer";
 
 export abstract class AbstractJsonStreamReader extends EventTarget {
-    url: string|URL;
+    url: string|URL|Request;
     tokenizer: AbstractJsonTokenizer;
     fetchOptions: RequestInit;
-    constructor(url: string|URL, tokenizer: AbstractJsonTokenizer, fetchOptions: RequestInit) {
+    constructor(url: string|URL|Request, tokenizer: AbstractJsonTokenizer, fetchOptions: RequestInit) {
       super();
       this.url = url;
       this.tokenizer = tokenizer;
