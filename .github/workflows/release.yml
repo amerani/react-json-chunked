@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build
-        uses: ./.github/workflows/ci-build.yml
+        uses: amerani/react-json-chunked/.github/workflows/ci-build.yml@main
       - name: Release
         uses: changesets/action@v1
         with:
