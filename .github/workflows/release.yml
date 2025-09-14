@@ -12,7 +12,7 @@ jobs:
     uses: changesets/action@v1
     with:
       publish: npm run release
-    env:
+    secrets:
       GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
