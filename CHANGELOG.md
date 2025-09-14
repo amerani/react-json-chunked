@@ -1,5 +1,11 @@
 # react-json-chunked
 
+## 0.3.5
+
+### Patch Changes
+
+- test again
+
 ## 0.3.4
 
 ### Patch Changes
