@@ -22,7 +22,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/am/react-json-chunked.git"
+    "url": "https://github.com/amerani/react-json-chunked"
   },
   "peerDependencies": {
     "react": "^19.1.1",
