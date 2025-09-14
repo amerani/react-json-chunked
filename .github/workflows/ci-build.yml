@@ -1,13 +1,10 @@
-on:
-  push:
-    branches:
-      - main
+name: Reusable CI Build Workflow
 
 permissions:
   contents: read
 
 jobs:
-  publish:
+  ci-build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

@@ -1,0 +1,10 @@
+name: Default Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    uses: ./.github/workflows/ci-build.yml
