@@ -27,6 +27,9 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Test
+        run: npm run test:ci
+
       - name: Release
         uses: changesets/action@v1
         with:

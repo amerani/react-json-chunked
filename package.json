@@ -16,7 +16,7 @@
     "watch:src": "vite build --watch",
     "watch:dist": "nodemon -w dist --exec 'vite'",
     "test": "vitest",
-    "test:run": "vitest run",
+    "test:ci": "vitest run",
     "version": "changeset && changeset version",
     "release": "changeset publish"
   },
