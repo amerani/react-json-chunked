@@ -6,12 +6,11 @@ on:
       - release
 
 jobs:
-  build:
-    uses: ./.github/workflows/ci-build.yml
   release:
-    needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Build
+        uses: ./.github/workflows/ci-build.yml
       - name: Release
         uses: changesets/action@v1
         with:
