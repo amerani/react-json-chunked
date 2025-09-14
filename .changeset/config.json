@@ -6,6 +6,7 @@
   "fixed": [],
   "linked": [],
   "access": "public",
+  "provenance": true,
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
   "ignore": []
