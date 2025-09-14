@@ -1,5 +1,11 @@
 # react-json-chunked
 
+## 0.3.7
+
+### Patch Changes
+
+- feat: add unit tests
+
 ## 0.3.6
 
 ### Patch Changes
