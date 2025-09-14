@@ -1,6 +1,6 @@
 {
   "name": "react-json-chunked",
-  "version": "0.3.0",
+  "version": "0.3.2",
   "description": "A React component for streaming JSON using chunked Transfer-Encoding",
   "type": "module",
   "files": [
@@ -16,19 +16,22 @@
     "watch:src": "vite build --watch",
     "watch:dist": "nodemon -w dist --exec 'vite'",
     "test": "vitest",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "version": "changeset && changeset version",
+    "release": "changeset publish"
   },
   "author": "Alek Merani",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/amerani/react-json-chunked"
+    "url": "git+https://github.com/amerani/react-json-chunked.git"
   },
   "peerDependencies": {
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.29.7",
     "@types/node": "^24.3.1",
     "@types/react": "^19.1.12",
     "@types/react-dom": "^19.1.9",
