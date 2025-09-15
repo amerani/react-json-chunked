@@ -15,9 +15,3 @@ jobs:
     secrets: inherit
     with:
       test: npm run test:ci
-  cd:
-    uses: amerani/cicd/.github/workflows/cd-npm.yml@main   
-    secrets: inherit
-    with:
-      test: npm run test:ci
-      publish: npm run release

@@ -5,39 +5,14 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+  id-token: write
+
 jobs:
-  release:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      id-token: write
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ inputs.node-version }}
-          registry-url: 'https://registry.npmjs.org'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run build
-
-      - name: Test
-        run: npm run test:ci
-
-      - name: Release
-        uses: changesets/action@v1
-        with:
-          publish: npm run release
-          setupGitUser: false
-          commitMode: github-api
-        env:
-           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
+  cd:
+    uses: amerani/cicd/.github/workflows/cd-npm.yml@main   
+    secrets: inherit
+    with:
+      test: npm run test:ci
+      publish: npm run release
