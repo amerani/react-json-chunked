@@ -6,5 +6,12 @@ on:
       - main
 
 jobs:
-  build:
-    uses: ./.github/workflows/ci-build.yml
+  ci:
+    uses: amerani/cicd/.github/workflows/ci-npm.yml@main
+    with:
+      test: npm run test:ci
+  cd:
+    uses: amerani/cicd/.github/workflows/ci-npm.yml@main    
+    with:
+      test: npm run test:ci
+      publish: npm run release
