@@ -11,7 +11,7 @@ jobs:
     with:
       test: npm run test:ci
   cd:
-    uses: amerani/cicd/.github/workflows/ci-npm.yml@main    
+    uses: amerani/cicd/.github/workflows/cd-npm.yml@main    
     with:
       test: npm run test:ci
       publish: npm run release
