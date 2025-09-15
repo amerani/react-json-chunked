@@ -1,5 +1,11 @@
 # react-json-chunked
 
+## 0.3.9
+
+### Patch Changes
+
+- use shared vite config
+
 ## 0.3.8
 
 ### Patch Changes
