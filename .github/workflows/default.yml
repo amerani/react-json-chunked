@@ -5,6 +5,13 @@ on:
     branches-ignore:
       - main
 
+permissions:
+  contents: write
+  id-token: write
+
 jobs:
-  build:
-    uses: ./.github/workflows/ci-build.yml
+  ci:
+    uses: amerani/cicd/.github/workflows/ci-npm.yml@main
+    secrets: inherit
+    with:
+      test: npm run test:ci

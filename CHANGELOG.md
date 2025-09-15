@@ -1,5 +1,11 @@
 # react-json-chunked
 
+## 0.3.8
+
+### Patch Changes
+
+- uses amerani/cicd templates
+
 ## 0.3.7
 
 ### Patch Changes
